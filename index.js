@@ -41,10 +41,7 @@ return data.filter(i=> i.Stage === "Final");
 Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
 function getYears(getFinalsCB) {
-let years = [];
-for (let i in getFinalsCB){
-years.push(getFinalsCB[i]["Year"])
-}
+let years = getFinalsCB.map(i=>i.Year)
 return years;
 }
 
@@ -53,15 +50,15 @@ return years;
 Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
 function getWinners(getFinalsCB) {
-let winners = [];
-for (let i in getFinalsCB){
-if (getFinalsCB[i]["Home Team Goals"] > getFinalsCB[i]["Away Team Goals"]){
-    winners.push(getFinalsCB[i]["Home Team Name"]);
-} else {
-    winners.push(getFinalsCB[i]["Away Team Name"]);
-}
-}
-return winners;
+let winners =[]
+getFinalsCB.filter(function (i){
+    if (i["Home Team Goals"]>i["Away Team Goals"]){
+        winners.push(i["Home Team Name"])
+    } else {
+        winners.push(i["Away Team Name"])
+    }
+})
+    return winners;
 }
 
 
