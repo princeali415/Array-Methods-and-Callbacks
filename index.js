@@ -129,11 +129,18 @@ Create a function called `getCountryWins` that takes the parameters `data` and `
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
-
-}
+function getCountryWins(data, teamInitials){
+    let winners =[]                                     // 1. Create an empty array to push too
+    data.filter(function (i){                           // 2. Use .filter to iterate through the array of objects and return the initials of every team that won
+    if (i["Home Team Goals"]>i["Away Team Goals"]){
+       winners.push(i["Home Team Initials"])
+    } else {
+       winners.push(i["Away Team Initials"])
+    }
+  })
+   let specificTeamArr = winners.filter(i=> i === teamInitials)     // 3. create a new array(specificTeamArr) that uses .filter to iterate throught the winners array and only pass inthe team initials that match the parameters teamInitials
+   return specificTeamArr.length                                    // 4. return the length of the specificTeamArr which is the total wins that team has had in each world cup
+  }
 
 
 
