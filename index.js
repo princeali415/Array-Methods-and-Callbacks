@@ -72,35 +72,50 @@ Parameters:
 * callback function getYears
 */
 
+// function getWinnersByYear(data, getYearsCB, getWinnersCB) {
+// let finalArr=[];
+// let finalsData = data.filter(i=> i.Stage === "Final");
+// for (let i = 0; i < finalsData.length; i++){
+// finalArr.push(`In ${getYearsCB(finalsData)[i]}, ${getWinnersCB(finalsData)[i]} won the world cup!`);
+// }
+// return finalArr;
+// }
+
 function getWinnersByYear(data, getYearsCB, getWinnersCB) {
-let finalArr=[];
-let finalsData = data.filter(i=> i.Stage === "Final");
-for (let i = 0; i < finalsData.length; i++){
-finalArr.push(`In ${getYearsCB(finalsData)[i]}, ${getWinnersCB(finalsData)[i]} won the world cup!`);
-}
-return finalArr;
+    let finalArr=[];
+    let finalsData = data.filter(i=> i.Stage === "Final");
+    finalsData.forEach((i,ind) => finalArr.push(`In ${getYearsCB(finalsData)[ind]}, ${getWinnersCB(finalsData)[ind]} won the world cup!`))
+    return finalArr;
 }
 
 //console.log(fifaData, getWinnersByYear(getWinners(getFinals(fifaData)), getYears(getFinals(fifaData))))
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(data) {
-let home = [];
-let away = [];
+// function getAverageGoals(data) {
+// let home = [];
+// let away = [];
 
-for (let i = 0; i < data.length; i++){
-home.push(data[i]["Home Team Goals"]);
-}
-for (let i = 0; i < data.length; i++){
-home.push(data[i]["Away Team Goals"]);
-}
+// for (let i = 0; i < data.length; i++){
+// home.push(data[i]["Home Team Goals"]);
+// }
+// for (let i = 0; i < data.length; i++){
+// home.push(data[i]["Away Team Goals"]);
+// }
+
+// let concatArr = home.concat(away);
+// let avg = (concatArr.reduce((a,b)=>a+b))/data.length;
+// return (Math.ceil(avg*100)/100).toString();
+// }
+
+function getAverageGoals(data) {
+let home = data.map(i => i["Home Team Goals"])
+let away = data.map(i => i["Away Team Goals"])
 
 let concatArr = home.concat(away);
 let avg = (concatArr.reduce((a,b)=>a+b))/data.length;
 return (Math.ceil(avg*100)/100).toString();
 }
-
 
 
 
